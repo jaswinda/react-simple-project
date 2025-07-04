@@ -1,9 +1,16 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const CustomComponent = ({ title }) => {
   const[count, setCount] = useState(0);
   const [liked, setLiked] = useState(false);
+
+  useEffect(() => {
+    console.log('like on '+title + ' is '+liked)
+  }, [liked]);
+
+
+
   return (
     <div className='card' onClick={() => setCount(count + 1)}>
       <h1>{title}</h1>
