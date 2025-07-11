@@ -1,9 +1,13 @@
 import React from 'react'
 
-export default function CustomButton({name, onPress}) {
+export default function CustomButton({name, onPress, disabled = false}) {
   return (
     <button 
-    style={{backgroundColor: 'red', color: 'white', padding: '40px 60px', borderRadius: '5px', border: 'none', cursor: 'pointer'}}
-    onClick={onPress}>{name}</button>
+      className={`custom-button ${disabled ? 'disabled' : ''}`}
+      onClick={onPress}
+      disabled={disabled}
+    >
+      {name}
+    </button>
   )
 }
