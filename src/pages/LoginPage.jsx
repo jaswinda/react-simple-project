@@ -3,8 +3,10 @@ import { useState } from "react";
 import CustomButton from "../components/CustomButton";
 import CustomField from "../components/CustomField";
 import { LOGIN_API } from "../util/apis";
+import { useAuthContext } from "../context/useAuthContext";
 
 const App = () => {
+  const {login} = useAuthContext();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -39,6 +41,8 @@ const App = () => {
       if(response.ok){
         const data=await response.json();
         console.log("Login successful", data);
+        const token = data.token;
+        login(token);
         setSuccess("Successfully logged in");
       }else{
         const errorText=await response.text();
