@@ -169,7 +169,7 @@ export default function HomePage() {
           <h2>Featured Products</h2>
           <div className="products-grid">
             {filteredProducts.map((product) => (
-              <ProductCard product={product} addToCart={addToCart} setSelectedProduct={setSelectedProduct}  key={product.id}/>
+              <ProductCard productData={product} addToCart={addToCart} setSelectedProduct={setSelectedProduct}  key={product.id}/>
             ))}
           </div>
         </div>
@@ -237,7 +237,7 @@ export default function HomePage() {
         )}
       </div>
       <ProductModal
-        product={selectedProduct}
+        productData={selectedProduct}
         isOpen={!!selectedProduct}
         onClose={() => setSelectedProduct(null)}
         onAddToCart={addToCart}
