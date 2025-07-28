@@ -41,7 +41,15 @@ export default function HomePage() {
   useEffect(() => {
     fetchCategories();
     fetchProducts();
+    if (localStorage.getItem("cart")) {
+      setCart(JSON.parse(localStorage.getItem("cart")));
+    }
   }, []);
+
+  useEffect(() => {
+    console.log("cart", cart);
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const addToCart = (product) => {
     setCart((prevCart) => {
@@ -169,7 +177,12 @@ export default function HomePage() {
           <h2>Featured Products</h2>
           <div className="products-grid">
             {filteredProducts.map((product) => (
-              <ProductCard productData={product} addToCart={addToCart} setSelectedProduct={setSelectedProduct}  key={product.id}/>
+              <ProductCard
+                productData={product}
+                addToCart={addToCart}
+                setSelectedProduct={setSelectedProduct}
+                key={product.id}
+              />
             ))}
           </div>
         </div>
