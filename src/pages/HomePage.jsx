@@ -3,14 +3,15 @@ import CustomButton from "../components/CustomButton";
 import { useAuthContext } from "../context/useAuthContext";
 import "./HomePage.css";
 import { CATEGORIES_API, PRODUCTS_API } from "../util/apis";
-
-
+import ProductCard from "../components/ProductCard";
+import ProductModal from "../components/ProductModal";
 
 export default function HomePage() {
   const { logout } = useAuthContext();
   const [cart, setCart] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [categories, setCategories] = useState([
     "All",
     "Electronics",
@@ -168,27 +169,7 @@ export default function HomePage() {
           <h2>Featured Products</h2>
           <div className="products-grid">
             {filteredProducts.map((product) => (
-              <div key={product.id} className="product-card">
-                <div className="product-image">
-                  <img src={product.image} alt={product.name} />
-                  <div className="product-overlay">
-                    <CustomButton
-                      name="Add to Cart"
-                      onPress={() => addToCart(product)}
-                    />
-                  </div>
-                </div>
-                <div className="product-info">
-                  <h3>{product.name}</h3>
-                  <p className="product-category">{product.category}</p>
-                  <div className="product-rating">
-                    {"⭐".repeat(Math.floor(product.rating.rate))}
-                    <span className="rating-text">({product.rating.rate})</span>
-                    <span className="reviews">({product.rating.count} reviews)</span>
-                  </div>
-                  <div className="product-price">${product.price}</div>
-                </div>
-              </div>
+              <ProductCard product={product} addToCart={addToCart} setSelectedProduct={setSelectedProduct}  key={product.id}/>
             ))}
           </div>
         </div>
@@ -255,6 +236,12 @@ export default function HomePage() {
           </div>
         )}
       </div>
+      <ProductModal
+        product={selectedProduct}
+        isOpen={!!selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        onAddToCart={addToCart}
+      />
     </div>
   );
 }
