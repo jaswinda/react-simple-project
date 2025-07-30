@@ -5,9 +5,11 @@ import "./HomePage.css";
 import { CATEGORIES_API, PRODUCTS_API } from "../util/apis";
 import ProductCard from "../components/ProductCard";
 import ProductModal from "../components/ProductModal";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
   const { logout } = useAuthContext();
+  const navigate = useNavigate();
   const [cart, setCart] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [products, setProducts] = useState([]);
@@ -92,6 +94,10 @@ export default function HomePage() {
 
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <div className="ecommerce-home">
       {/* Header */}
@@ -128,7 +134,13 @@ export default function HomePage() {
               <span className="cart-count">{cartItemCount}</span>
               🛒
             </div>
-            <CustomButton onPress={logout} name="Logout" />
+            <button 
+              className="profile-link"
+              onClick={() => navigate('/profile')}
+            >
+              👤 Profile
+            </button>
+            <CustomButton onPress={handleLogout} name="Logout" />
           </div>
         </div>
       </header>

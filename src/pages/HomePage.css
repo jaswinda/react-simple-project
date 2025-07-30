@@ -56,6 +56,26 @@
   gap: 1rem;
 }
 
+.profile-link {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-link:hover {
+  background: #5a6fd8;
+  transform: translateY(-2px);
+}
+
 .cart-icon {
   position: relative;
   font-size: 1.5rem;
